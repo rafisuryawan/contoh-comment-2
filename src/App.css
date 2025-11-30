@@ -1,0 +1,357 @@
+/* Reset dasar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body, html {
+  height: 100%;
+  background-color: #121212; /* Background hitam pekat */
+  color: #e0e0e0;
+}
+
+/* Layout Utama: Flexbox membagi layar jadi 2 */
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* --- BAGIAN KIRI (GAMBAR) --- */
+.main-content {
+  flex: 1; /* Mengambil sisa ruang */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0f0f0f;
+  padding: 20px;
+}
+
+.image-card {
+  background-color: white; /* Card putih seperti di screenshot */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  max-width: 600px;
+  width: 100%;
+}
+
+.card-header h3 {
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.image-wrapper {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  /* Hover effect opsional */
+  cursor: pointer;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+
+/* --- BAGIAN KANAN (SIDEBAR) --- */
+.sidebar {
+  width: 400px;
+  background-color: #242424; /* Warna abu-abu sidebar */
+  border-left: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #333;
+}
+
+.sidebar-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* List Komentar (Scrollable) */
+.comments-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.comment-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.time {
+  font-size: 12px;
+  color: #888;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: #ddd;
+  margin-bottom: 4px;
+}
+
+.reply-btn {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.reply-btn:hover {
+  color: #bbb;
+}
+
+/* Input Area di Bawah */
+.input-area {
+  padding: 15px;
+  background-color: #242424;
+  border-top: 1px solid #333;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  border-radius: 8px;
+  padding: 8px 15px;
+}
+
+.input-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  font-size: 14px;
+}
+
+.send-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.send-btn:hover {
+  color: white;
+}
+
+/* ... CSS sebelumnya biarkan saja ... */
+
+/* --- STYLE TAMBAHAN UNTUK FLOATING BOX --- */
+
+/* Pastikan wrapper relative agar posisi absolute anak bekerja dengan benar */
+.image-wrapper {
+  position: relative; 
+  cursor: crosshair; /* Ubah kursor jadi tanda tambah */
+}
+
+.floating-comment-box {
+  position: absolute;
+  z-index: 10;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  width: 250px;
+  
+  /* Animasi muncul */
+  animation: popIn 0.2s ease-out;
+  
+  /* Geser sedikit agar tidak menutupi titik klik pas di tengah */
+  transform: translate(10px, 10px);
+}
+
+/* Titik Indikator (Opsional: visualisasi titik klik) */
+.pin-indicator {
+  position: absolute;
+  top: -6px; /* Geser balik ke titik klik */
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  background-color: #ff4757;
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.floating-comment-box input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  background: #f9f9f9;
+}
+
+.floating-comment-box input:focus {
+  border-color: #007bff;
+  background: #fff;
+}
+
+.floating-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.floating-actions button {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.cancel-btn {
+  background: #f1f1f1;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background: #e0e0e0;
+}
+
+.submit-btn {
+  background: #007bff;
+  color: white;
+}
+
+.submit-btn:hover {
+  background: #0056b3;
+}
+
+/* Keyframes animasi */
+@keyframes popIn {
+  from { opacity: 0; transform: translate(10px, 20px); }
+  to { opacity: 1; transform: translate(10px, 10px); }
+}
+
+/* ... CSS sebelumnya ... */
+
+/* --- PIN YANG SUDAH TERSIMPAN --- */
+.saved-pin {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50% 50% 50% 0; /* Bentuk seperti tear drop / pin map */
+  background-color: #ff4757;
+  border: 2px solid white;
+  transform: translate(-50%, -100%) rotate(-45deg); /* Posisikan ujung lancip di titik klik */
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+/* Memutar balik gambar di dalam pin agar tetap tegak */
+.saved-pin img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transform: rotate(45deg); /* Putar balik image */
+  border: 1px solid white;
+}
+
+.saved-pin:hover {
+  transform: translate(-50%, -110%) rotate(-45deg) scale(1.1);
+  z-index: 20; /* Pastikan di atas pin lain saat di-hover */
+}
+
+/* --- TOOLTIP SAAT HOVER PIN --- */
+.pin-tooltip {
+  position: absolute;
+  bottom: 140%; /* Muncul di atas pin */
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg); /* Rotate 45deg karena parent di-rotate */
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: max-content;
+  max-width: 200px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  text-align: center;
+}
+
+.pin-tooltip strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #4facfe;
+}
+
+.saved-pin:hover .pin-tooltip {
+  opacity: 1;
+}
+
+/* --- INDIKATOR INPUT SEMENTARA (Titik merah kecil) --- */
+.pin-indicator-temp {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 10px;
+  height: 10px;
+  background-color: #007bff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+/* Badge kecil di sidebar list */
+.pin-badge {
+  font-size: 10px;
+  margin-left: 5px;
+}
